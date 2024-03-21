@@ -1,0 +1,71 @@
+//Write a Java program to create an abstract class Employee with abstract methods calculateSalary() and displayInfo(). Create subclasses Manager and Programmer that extend the Employee class and implement the respective methods to calculate salary and display information for each role.
+abstract class Employee {
+    protected String name;
+    protected double salary;
+
+    public Employee(String n, double s) {
+        this.name = n;
+        this.salary = s;
+    }
+
+    public abstract double calculateSalary();
+
+    public abstract void displayInformation();
+}
+
+class Manager extends Employee {
+    private double bonus;
+
+    public Manager(String n, double s, double b) {
+        super(n, s);
+        this.bonus = b;
+    }
+
+    @Override
+    public double calculateSalary() {
+        return salary + bonus;
+    }
+
+    @Override
+    public void displayInformation() {
+        System.out.println("Manager Name: " + name);
+        System.out.println("Salary: " + salary);
+        System.out.println("Bonus: " + bonus);
+        System.out.println("Total salary: " + calculateSalary());
+    }
+}
+
+class Programmer extends Employee {
+    private double overtime;
+    private double overtimeRate;
+
+    public Programmer(String n, double s, double o, double or) {
+        super(n, s);
+        this.overtime = o;
+        this.overtimeRate = or;
+    }
+
+    @Override
+    public double calculateSalary() {
+        return salary + (overtime * overtimeRate);
+    }
+
+    @Override
+    public void displayInformation() {
+        System.out.println("Programmer Name: " + name);
+        System.out.println("Salary: " + salary);
+        System.out.println("Overtime: " + overtime);
+        System.out.println("Overtime Rate: " + overtimeRate);
+        System.out.println("Total Salary: " + calculateSalary());
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Manager m = new Manager("Joy Sarker", 50000, 2000);
+        m.displayInformation();
+
+        Programmer p = new Programmer("Sabbir Ahamed", 30000, 7, 10);
+        p.displayInformation();
+    }
+}
